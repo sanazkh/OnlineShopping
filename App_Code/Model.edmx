@@ -1,0 +1,798 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="webprojectdbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="webprojectdbModelStoreContainer">
+          <EntitySet Name="Categories" EntityType="webprojectdbModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ForumPosts" EntityType="webprojectdbModel.Store.ForumPosts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Messages" EntityType="webprojectdbModel.Store.Messages" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="OrderProduct" EntityType="webprojectdbModel.Store.OrderProduct" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Orders" EntityType="webprojectdbModel.Store.Orders" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Products" EntityType="webprojectdbModel.Store.Products" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Roles" EntityType="webprojectdbModel.Store.Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="webprojectdbModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ForumView" EntityType="webprojectdbModel.Store.ForumView" store:Type="Views" store:Schema="dbo" store:Name="ForumView">
+            <DefiningQuery>SELECT 
+      [ForumView].[UserName] AS [UserName], 
+      [ForumView].[ForumDate] AS [ForumDate], 
+      [ForumView].[ForumTitle] AS [ForumTitle], 
+      [ForumView].[ForumText] AS [ForumText]
+      FROM [dbo].[ForumView] AS [ForumView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ManageOrderByAdminView" EntityType="webprojectdbModel.Store.ManageOrderByAdminView" store:Type="Views" store:Schema="dbo" store:Name="ManageOrderByAdminView">
+            <DefiningQuery>SELECT 
+      [ManageOrderByAdminView].[Expr1] AS [Expr1], 
+      [ManageOrderByAdminView].[Expr2] AS [Expr2], 
+      [ManageOrderByAdminView].[UserName] AS [UserName], 
+      [ManageOrderByAdminView].[OrderDate] AS [OrderDate], 
+      [ManageOrderByAdminView].[OrderID] AS [OrderID], 
+      [ManageOrderByAdminView].[Confirmed] AS [Confirmed]
+      FROM [dbo].[ManageOrderByAdminView] AS [ManageOrderByAdminView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="OrderDetailOfaUser" EntityType="webprojectdbModel.Store.OrderDetailOfaUser" store:Type="Views" store:Schema="dbo" store:Name="OrderDetailOfaUser">
+            <DefiningQuery>SELECT 
+      [OrderDetailOfaUser].[OrderID] AS [OrderID], 
+      [OrderDetailOfaUser].[FirstName] AS [FirstName], 
+      [OrderDetailOfaUser].[LastName] AS [LastName], 
+      [OrderDetailOfaUser].[OrderDate] AS [OrderDate], 
+      [OrderDetailOfaUser].[ProductName] AS [ProductName], 
+      [OrderDetailOfaUser].[Confirmed] AS [Confirmed], 
+      [OrderDetailOfaUser].[Quantity] AS [Quantity], 
+      [OrderDetailOfaUser].[DepositNo] AS [DepositNo], 
+      [OrderDetailOfaUser].[UserID] AS [UserID]
+      FROM [dbo].[OrderDetailOfaUser] AS [OrderDetailOfaUser]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ShoppingBaskets" EntityType="webprojectdbModel.Store.ShoppingBaskets" store:Type="Views" store:Schema="dbo" store:Name="ShoppingBaskets">
+            <DefiningQuery>SELECT 
+      [ShoppingBaskets].[ProductName] AS [ProductName], 
+      [ShoppingBaskets].[Quantity] AS [Quantity], 
+      [ShoppingBaskets].[ProductPrice] AS [ProductPrice], 
+      [ShoppingBaskets].[TotalPrice] AS [TotalPrice], 
+      [ShoppingBaskets].[Confirmed] AS [Confirmed], 
+      [ShoppingBaskets].[UserID] AS [UserID]
+      FROM [dbo].[ShoppingBaskets] AS [ShoppingBaskets]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ForumPosts_ForumPosts" Association="webprojectdbModel.Store.FK_ForumPosts_ForumPosts">
+            <End Role="ForumPosts" EntitySet="ForumPosts" />
+            <End Role="ForumPosts1" EntitySet="ForumPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ForumPosts_Users" Association="webprojectdbModel.Store.FK_ForumPosts_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ForumPosts" EntitySet="ForumPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProduct_Orders" Association="webprojectdbModel.Store.FK_OrderProduct_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderProduct" EntitySet="OrderProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProduct_Products" Association="webprojectdbModel.Store.FK_OrderProduct_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderProduct" EntitySet="OrderProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Users" Association="webprojectdbModel.Store.FK_Orders_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Categories" Association="webprojectdbModel.Store.FK_Products_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="webprojectdbModel.Store.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CategoryDescription" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ForumPosts">
+          <Key>
+            <PropertyRef Name="ForumID" />
+          </Key>
+          <Property Name="ForumID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ForumTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="UsersID" Type="bigint" Nullable="false" />
+          <Property Name="ForumText" Type="ntext" />
+          <Property Name="ForumDate" Type="datetime" />
+          <Property Name="ParentID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Message" Type="ntext" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="OrderProduct">
+          <Key>
+            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="ProductID" Type="bigint" Nullable="false" />
+          <Property Name="OrderID" Type="bigint" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="bigint" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="Confirmed" Type="bit" Nullable="false" />
+          <Property Name="DepositNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Telephon" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ProductPrice" Type="float" Nullable="false" />
+          <Property Name="CategoryID" Type="bigint" Nullable="false" />
+          <Property Name="RegistrationDate" Type="date" />
+          <Property Name="NoOfVisits" Type="bigint" Nullable="false" />
+          <Property Name="ProductImage" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ProductDescription" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="RoleDescription" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="PassWord" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="RoleID" Type="bigint" Nullable="false" />
+          <Property Name="WebSite" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="RegistrationDate" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view '4A92426F3B7EAA322C03E643239D2AA6_2\WEEK 12\PROJECT\ONLINE SHOPPING SYSTEMV6\ONLINE SHOPPING SYSTEMV6.6\APP_DATA\WEBPROJECTDB.MDF.dbo.ForumView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="ForumView">
+          <Key>
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="ForumDate" />
+            <PropertyRef Name="ForumTitle" />
+            <PropertyRef Name="ForumText" />
+          </Key>
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ForumDate" Type="datetime" Nullable="false" />
+          <Property Name="ForumTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ForumText" Type="ntext" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view '4A92426F3B7EAA322C03E643239D2AA6_2\WEEK 12\PROJECT\ONLINE SHOPPING SYSTEMV6\ONLINE SHOPPING SYSTEMV6.6\APP_DATA\WEBPROJECTDB.MDF.dbo.ManageOrderByAdminView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="ManageOrderByAdminView">
+          <Key>
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="Confirmed" />
+          </Key>
+          <Property Name="Expr1" Type="float" />
+          <Property Name="Expr2" Type="float" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="OrderID" Type="bigint" Nullable="false" />
+          <Property Name="Confirmed" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view '4A92426F3B7EAA322C03E643239D2AA6_2\WEEK 12\PROJECT\ONLINE SHOPPING SYSTEMV6\ONLINE SHOPPING SYSTEMV6.6\APP_DATA\WEBPROJECTDB.MDF.dbo.OrderDetailOfaUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="OrderDetailOfaUser">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="ProductName" />
+            <PropertyRef Name="Confirmed" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="OrderID" Type="bigint" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="ProductName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Confirmed" Type="bit" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="DepositNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="UserID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view '4A92426F3B7EAA322C03E643239D2AA6_2\WEEK 12\PROJECT\ONLINE SHOPPING SYSTEMV6\ONLINE SHOPPING SYSTEMV6.6\APP_DATA\WEBPROJECTDB.MDF.dbo.ShoppingBaskets' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="ShoppingBaskets">
+          <Key>
+            <PropertyRef Name="ProductName" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="ProductPrice" />
+            <PropertyRef Name="Confirmed" />
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="ProductName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="ProductPrice" Type="float" Nullable="false" />
+          <Property Name="TotalPrice" Type="float" />
+          <Property Name="Confirmed" Type="bit" Nullable="false" />
+          <Property Name="UserID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ForumPosts_ForumPosts">
+          <End Role="ForumPosts" Type="webprojectdbModel.Store.ForumPosts" Multiplicity="0..1" />
+          <End Role="ForumPosts1" Type="webprojectdbModel.Store.ForumPosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ForumPosts">
+              <PropertyRef Name="ForumID" />
+            </Principal>
+            <Dependent Role="ForumPosts1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ForumPosts_Users">
+          <End Role="Users" Type="webprojectdbModel.Store.Users" Multiplicity="1" />
+          <End Role="ForumPosts" Type="webprojectdbModel.Store.ForumPosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ForumPosts">
+              <PropertyRef Name="UsersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProduct_Orders">
+          <End Role="Orders" Type="webprojectdbModel.Store.Orders" Multiplicity="1" />
+          <End Role="OrderProduct" Type="webprojectdbModel.Store.OrderProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderProduct">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProduct_Products">
+          <End Role="Products" Type="webprojectdbModel.Store.Products" Multiplicity="1" />
+          <End Role="OrderProduct" Type="webprojectdbModel.Store.OrderProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderProduct">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Users">
+          <End Role="Users" Type="webprojectdbModel.Store.Users" Multiplicity="1" />
+          <End Role="Orders" Type="webprojectdbModel.Store.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Categories">
+          <End Role="Categories" Type="webprojectdbModel.Store.Categories" Multiplicity="1" />
+          <End Role="Products" Type="webprojectdbModel.Store.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="webprojectdbModel.Store.Roles" Multiplicity="1" />
+          <End Role="Users" Type="webprojectdbModel.Store.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="webprojectdbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="webprojectdbEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="webprojectdbModel.Category" />
+          <EntitySet Name="ForumPosts" EntityType="webprojectdbModel.ForumPost" />
+          <EntitySet Name="Messages" EntityType="webprojectdbModel.Message" />
+          <EntitySet Name="OrderProducts" EntityType="webprojectdbModel.OrderProduct" />
+          <EntitySet Name="Orders" EntityType="webprojectdbModel.Order" />
+          <EntitySet Name="Products" EntityType="webprojectdbModel.Product" />
+          <EntitySet Name="Roles" EntityType="webprojectdbModel.Role" />
+          <EntitySet Name="Users" EntityType="webprojectdbModel.User" />
+          <EntitySet Name="ForumViews" EntityType="webprojectdbModel.ForumView" />
+          <EntitySet Name="ManageOrderByAdminViews" EntityType="webprojectdbModel.ManageOrderByAdminView" />
+          <EntitySet Name="OrderDetailOfaUsers" EntityType="webprojectdbModel.OrderDetailOfaUser" />
+          <EntitySet Name="ShoppingBaskets" EntityType="webprojectdbModel.ShoppingBasket" />
+          <AssociationSet Name="FK_Products_Categories" Association="webprojectdbModel.FK_Products_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ForumPosts_ForumPosts" Association="webprojectdbModel.FK_ForumPosts_ForumPosts">
+            <End Role="ForumPosts" EntitySet="ForumPosts" />
+            <End Role="ForumPosts1" EntitySet="ForumPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ForumPosts_Users" Association="webprojectdbModel.FK_ForumPosts_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ForumPosts" EntitySet="ForumPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProduct_Orders" Association="webprojectdbModel.FK_OrderProduct_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderProduct" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProduct_Products" Association="webprojectdbModel.FK_OrderProduct_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderProduct" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Users" Association="webprojectdbModel.FK_Orders_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="webprojectdbModel.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CategoryDescription" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Products" Relationship="webprojectdbModel.FK_Products_Categories" FromRole="Categories" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="ForumPost">
+          <Key>
+            <PropertyRef Name="ForumID" />
+          </Key>
+          <Property Name="ForumID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ForumTitle" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="UsersID" Type="Int64" Nullable="false" />
+          <Property Name="ForumText" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ForumDate" Type="DateTime" />
+          <Property Name="ParentID" Type="Int64" />
+          <NavigationProperty Name="ForumPosts1" Relationship="webprojectdbModel.FK_ForumPosts_ForumPosts" FromRole="ForumPosts" ToRole="ForumPosts1" />
+          <NavigationProperty Name="ForumPost1" Relationship="webprojectdbModel.FK_ForumPosts_ForumPosts" FromRole="ForumPosts1" ToRole="ForumPosts" />
+          <NavigationProperty Name="User" Relationship="webprojectdbModel.FK_ForumPosts_Users" FromRole="ForumPosts" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="MessageID" />
+          </Key>
+          <Property Name="MessageID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Title" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Message1" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Date" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="OrderProduct">
+          <Key>
+            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="ProductID" Type="Int64" Nullable="false" />
+          <Property Name="OrderID" Type="Int64" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="webprojectdbModel.FK_OrderProduct_Orders" FromRole="OrderProduct" ToRole="Orders" />
+          <NavigationProperty Name="Product" Relationship="webprojectdbModel.FK_OrderProduct_Products" FromRole="OrderProduct" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" />
+          <Property Name="Confirmed" Type="Boolean" Nullable="false" />
+          <Property Name="DepositNo" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Telephon" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="OrderProducts" Relationship="webprojectdbModel.FK_OrderProduct_Orders" FromRole="Orders" ToRole="OrderProduct" />
+          <NavigationProperty Name="User" Relationship="webprojectdbModel.FK_Orders_Users" FromRole="Orders" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ProductPrice" Type="Double" Nullable="false" />
+          <Property Name="CategoryID" Type="Int64" Nullable="false" />
+          <Property Name="RegistrationDate" Type="DateTime" />
+          <Property Name="NoOfVisits" Type="Int64" Nullable="false" />
+          <Property Name="ProductImage" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="ProductDescription" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Category" Relationship="webprojectdbModel.FK_Products_Categories" FromRole="Products" ToRole="Categories" />
+          <NavigationProperty Name="OrderProducts" Relationship="webprojectdbModel.FK_OrderProduct_Products" FromRole="Products" ToRole="OrderProduct" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="RoleDescription" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Users" Relationship="webprojectdbModel.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="PassWord" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Telephone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="RoleID" Type="Int64" Nullable="false" />
+          <Property Name="WebSite" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="RegistrationDate" Type="DateTime" />
+          <NavigationProperty Name="ForumPosts" Relationship="webprojectdbModel.FK_ForumPosts_Users" FromRole="Users" ToRole="ForumPosts" />
+          <NavigationProperty Name="Orders" Relationship="webprojectdbModel.FK_Orders_Users" FromRole="Users" ToRole="Orders" />
+          <NavigationProperty Name="Role" Relationship="webprojectdbModel.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="ForumView">
+          <Key>
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="ForumDate" />
+            <PropertyRef Name="ForumTitle" />
+            <PropertyRef Name="ForumText" />
+          </Key>
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ForumDate" Type="DateTime" Nullable="false" />
+          <Property Name="ForumTitle" Type="String" MaxLength="50" Unicode="true" FixedLength="false" Nullable="false" />
+          <Property Name="ForumText" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ManageOrderByAdminView">
+          <Key>
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="Confirmed" />
+          </Key>
+          <Property Name="Expr1" Type="Double" />
+          <Property Name="Expr2" Type="Double" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="OrderDate" Type="DateTime" />
+          <Property Name="OrderID" Type="Int64" Nullable="false" />
+          <Property Name="Confirmed" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderDetailOfaUser">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="ProductName" />
+            <PropertyRef Name="Confirmed" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="OrderID" Type="Int64" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="OrderDate" Type="DateTime" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Confirmed" Type="Boolean" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="DepositNo" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShoppingBasket">
+          <Key>
+            <PropertyRef Name="ProductName" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="ProductPrice" />
+            <PropertyRef Name="Confirmed" />
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="ProductPrice" Type="Double" Nullable="false" />
+          <Property Name="TotalPrice" Type="Double" />
+          <Property Name="Confirmed" Type="Boolean" Nullable="false" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Products_Categories">
+          <End Role="Categories" Type="webprojectdbModel.Category" Multiplicity="1" />
+          <End Role="Products" Type="webprojectdbModel.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ForumPosts_ForumPosts">
+          <End Role="ForumPosts" Type="webprojectdbModel.ForumPost" Multiplicity="0..1" />
+          <End Role="ForumPosts1" Type="webprojectdbModel.ForumPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ForumPosts">
+              <PropertyRef Name="ForumID" />
+            </Principal>
+            <Dependent Role="ForumPosts1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ForumPosts_Users">
+          <End Role="Users" Type="webprojectdbModel.User" Multiplicity="1" />
+          <End Role="ForumPosts" Type="webprojectdbModel.ForumPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ForumPosts">
+              <PropertyRef Name="UsersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProduct_Orders">
+          <End Role="Orders" Type="webprojectdbModel.Order" Multiplicity="1" />
+          <End Role="OrderProduct" Type="webprojectdbModel.OrderProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderProduct">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProduct_Products">
+          <End Role="Products" Type="webprojectdbModel.Product" Multiplicity="1" />
+          <End Role="OrderProduct" Type="webprojectdbModel.OrderProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderProduct">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Users">
+          <End Role="Users" Type="webprojectdbModel.User" Multiplicity="1" />
+          <End Role="Orders" Type="webprojectdbModel.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="webprojectdbModel.Role" Multiplicity="1" />
+          <End Role="Users" Type="webprojectdbModel.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="webprojectdbModelStoreContainer" CdmEntityContainer="webprojectdbEntities1">
+          <EntitySetMapping Name="Categories"><EntityTypeMapping TypeName="webprojectdbModel.Category"><MappingFragment StoreEntitySet="Categories">
+            <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+            <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+            <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ForumPosts"><EntityTypeMapping TypeName="webprojectdbModel.ForumPost"><MappingFragment StoreEntitySet="ForumPosts">
+            <ScalarProperty Name="ForumID" ColumnName="ForumID" />
+            <ScalarProperty Name="ForumTitle" ColumnName="ForumTitle" />
+            <ScalarProperty Name="UsersID" ColumnName="UsersID" />
+            <ScalarProperty Name="ForumText" ColumnName="ForumText" />
+            <ScalarProperty Name="ForumDate" ColumnName="ForumDate" />
+            <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Messages"><EntityTypeMapping TypeName="webprojectdbModel.Message"><MappingFragment StoreEntitySet="Messages">
+            <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Email" ColumnName="Email" />
+            <ScalarProperty Name="Title" ColumnName="Title" />
+            <ScalarProperty Name="Message1" ColumnName="Message" />
+            <ScalarProperty Name="Date" ColumnName="Date" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="OrderProducts"><EntityTypeMapping TypeName="webprojectdbModel.OrderProduct"><MappingFragment StoreEntitySet="OrderProduct">
+            <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+            <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+            <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Orders"><EntityTypeMapping TypeName="webprojectdbModel.Order"><MappingFragment StoreEntitySet="Orders">
+            <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+            <ScalarProperty Name="UserID" ColumnName="UserID" />
+            <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+            <ScalarProperty Name="Confirmed" ColumnName="Confirmed" />
+            <ScalarProperty Name="DepositNo" ColumnName="DepositNo" />
+            <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+            <ScalarProperty Name="LastName" ColumnName="LastName" />
+            <ScalarProperty Name="Telephon" ColumnName="Telephon" />
+            <ScalarProperty Name="Address" ColumnName="Address" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Products"><EntityTypeMapping TypeName="webprojectdbModel.Product"><MappingFragment StoreEntitySet="Products">
+            <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+            <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+            <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
+            <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+            <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+            <ScalarProperty Name="NoOfVisits" ColumnName="NoOfVisits" />
+            <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
+            <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Roles"><EntityTypeMapping TypeName="webprojectdbModel.Role"><MappingFragment StoreEntitySet="Roles">
+            <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+            <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+            <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Users"><EntityTypeMapping TypeName="webprojectdbModel.User"><MappingFragment StoreEntitySet="Users">
+            <ScalarProperty Name="UserID" ColumnName="UserID" />
+            <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+            <ScalarProperty Name="LastName" ColumnName="LastName" />
+            <ScalarProperty Name="UserName" ColumnName="UserName" />
+            <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+            <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+            <ScalarProperty Name="Address" ColumnName="Address" />
+            <ScalarProperty Name="Email" ColumnName="Email" />
+            <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+            <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+            <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+            <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ForumViews"><EntityTypeMapping TypeName="webprojectdbModel.ForumView"><MappingFragment StoreEntitySet="ForumView">
+            <ScalarProperty Name="UserName" ColumnName="UserName" />
+            <ScalarProperty Name="ForumDate" ColumnName="ForumDate" />
+            <ScalarProperty Name="ForumTitle" ColumnName="ForumTitle" />
+            <ScalarProperty Name="ForumText" ColumnName="ForumText" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ManageOrderByAdminViews"><EntityTypeMapping TypeName="webprojectdbModel.ManageOrderByAdminView"><MappingFragment StoreEntitySet="ManageOrderByAdminView">
+            <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+            <ScalarProperty Name="Expr2" ColumnName="Expr2" />
+            <ScalarProperty Name="UserName" ColumnName="UserName" />
+            <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+            <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+            <ScalarProperty Name="Confirmed" ColumnName="Confirmed" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="OrderDetailOfaUsers"><EntityTypeMapping TypeName="webprojectdbModel.OrderDetailOfaUser"><MappingFragment StoreEntitySet="OrderDetailOfaUser">
+            <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+            <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+            <ScalarProperty Name="LastName" ColumnName="LastName" />
+            <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+            <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+            <ScalarProperty Name="Confirmed" ColumnName="Confirmed" />
+            <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+            <ScalarProperty Name="DepositNo" ColumnName="DepositNo" />
+            <ScalarProperty Name="UserID" ColumnName="UserID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ShoppingBaskets"><EntityTypeMapping TypeName="webprojectdbModel.ShoppingBasket"><MappingFragment StoreEntitySet="ShoppingBaskets">
+            <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+            <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+            <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
+            <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+            <ScalarProperty Name="Confirmed" ColumnName="Confirmed" />
+            <ScalarProperty Name="UserID" ColumnName="UserID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model">
+        <EntityTypeShape EntityType="webprojectdbModel.Category" Width="1.5" PointX="3" PointY="9.375" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="webprojectdbModel.ForumPost" Width="1.5" PointX="5.25" PointY="1.125" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="webprojectdbModel.Message" Width="1.5" PointX="7.75" PointY="0.75" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="webprojectdbModel.OrderProduct" Width="1.5" PointX="7.5" PointY="5.25" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="webprojectdbModel.Order" Width="1.5" PointX="5.25" PointY="4.625" Height="3.1340950520833335" IsExpanded="true" />
+        <EntityTypeShape EntityType="webprojectdbModel.Product" Width="1.5" PointX="5.25" PointY="8.75" Height="2.9417936197916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="webprojectdbModel.Role" Width="1.5" PointX="0.75" PointY="3.625" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="webprojectdbModel.User" Width="1.5" PointX="3" PointY="2.5" Height="3.9033007812499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="webprojectdbModel.ForumView" Width="1.5" PointX="7.75" PointY="8.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="webprojectdbModel.ManageOrderByAdminView" Width="1.5" PointX="9.75" PointY="0.75" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="webprojectdbModel.OrderDetailOfaUser" Width="1.5" PointX="9.75" PointY="3.75" Height="2.7494921875000031" IsExpanded="true" />
+        <EntityTypeShape EntityType="webprojectdbModel.ShoppingBasket" Width="1.5" PointX="9.75" PointY="7.75" Height="2.1725878906250031" IsExpanded="true" />
+        <AssociationConnector Association="webprojectdbModel.FK_Products_Categories" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="10.268992513020834" />
+          <ConnectorPoint PointX="5.25" PointY="10.268992513020834" />
+        </AssociationConnector>
+        <AssociationConnector Association="webprojectdbModel.FK_ForumPosts_ForumPosts" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.7819230769230767" PointY="3.8744921874999996" />
+          <ConnectorPoint PointX="5.7819230769230767" PointY="4.1244921875" />
+          <ConnectorPoint PointX="6.2284615384615378" PointY="4.1244921875" />
+          <ConnectorPoint PointX="6.2284615384615378" PointY="3.8744921874999996" />
+        </AssociationConnector>
+        <AssociationConnector Association="webprojectdbModel.FK_ForumPosts_Users" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="3.18724609375" />
+          <ConnectorPoint PointX="5.25" PointY="3.18724609375" />
+        </AssociationConnector>
+        <AssociationConnector Association="webprojectdbModel.FK_OrderProduct_Orders" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="6.2401432291666667" />
+          <ConnectorPoint PointX="7.5" PointY="6.2401432291666667" />
+        </AssociationConnector>
+        <AssociationConnector Association="webprojectdbModel.FK_OrderProduct_Products" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="11.146139322916667" />
+          <ConnectorPoint PointX="7.59375" PointY="11.146139322916667" />
+          <ConnectorPoint PointX="7.59375" PointY="7.2302864583333335" />
+        </AssociationConnector>
+        <AssociationConnector Association="webprojectdbModel.FK_Orders_Users" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="5.514150390625" />
+          <ConnectorPoint PointX="5.25" PointY="5.514150390625" />
+        </AssociationConnector>
+        <AssociationConnector Association="webprojectdbModel.FK_Users_Roles" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="4.5189925130208337" />
+          <ConnectorPoint PointX="3" PointY="4.5189925130208337" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
